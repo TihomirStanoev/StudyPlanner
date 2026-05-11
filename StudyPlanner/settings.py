@@ -36,6 +36,12 @@ DEBUG = env('DEBUG')
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 
+PROJECT_APPS = [
+    'accounts',
+    'common',
+    'topics',
+    'tracking',
+]
 
 
 INSTALLED_APPS = [
@@ -45,8 +51,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "rest_framework",
-]
+    'rest_framework',
+    'rest_framework_simplejwt',
+] + PROJECT_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
