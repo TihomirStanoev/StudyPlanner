@@ -12,7 +12,7 @@ class BaseModel(models.Model):
 
 
 
-class SoftDeletionModel(models.Model):
+class SoftDeletionModel(BaseModel):
     deleted_at = models.DateTimeField(null=True, blank=True)
     is_deleted = models.BooleanField(default=False)
 
