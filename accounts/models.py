@@ -8,3 +8,5 @@ from accounts.validators import MaxYearValidator
 
 class CustomUser(AbstractUser):
     birth_year = models.PositiveIntegerField(validators=[MinValueValidator(1900), MaxYearValidator()])
+
+    REQUIRED_FIELDS = ["email", "birth_year"]
