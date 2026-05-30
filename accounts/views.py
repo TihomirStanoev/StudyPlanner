@@ -1,5 +1,5 @@
 from rest_framework import generics
-from accounts.serializer import RegisterSerializer
+from accounts.serializers import RegisterSerializer
 
 
 
