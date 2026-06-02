@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 from common.managers import SoftDeletionManager
 
 
@@ -22,3 +22,18 @@ class SoftDeletionModel(BaseModel):
 
     class Meta:
         abstract = True
+
+
+    def soft_delete(self):
+        self.is_deleted = True
+        self.deleted_at = timezone.now()
+        self.save()
+        return 1, {self._meta.label: 1}
+
+
+    def delete(self, *args, **kwargs):
+        return self.soft_delete()
+
+
+    def hard_delete(self, *args, **kwargs):
+        return super().delete(*args, **kwargs)
