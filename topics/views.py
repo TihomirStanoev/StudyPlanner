@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
-from topics.models import Topic
-from topics.serializers import TopicSerializer
+from topics.models import Topic, Resource
+from topics.serializers import TopicSerializer, ResourceSerializer
 
 
 class TopicBaseAPIView:
@@ -22,4 +22,21 @@ class TopicListCreateAPIView(TopicBaseAPIView, generics.ListCreateAPIView):
 
 
 class TopicDetailAPIView(TopicBaseAPIView, generics.RetrieveUpdateDestroyAPIView):
+    pass
+
+
+
+class ResourceBaseAPIView:
+    serializer_class = ResourceSerializer
+    permission_classes = [IsAuthenticated]
+
+
+    def get_queryset(self):
+        return Resource.objects.select_related('topic').filter(topic__owner=self.request.user)
+
+
+class ResourceListCreateAPIView(ResourceBaseAPIView, generics.ListCreateAPIView):
+    pass
+
+class ResourceDetailAPIView(ResourceBaseAPIView, generics.RetrieveUpdateDestroyAPIView):
     pass

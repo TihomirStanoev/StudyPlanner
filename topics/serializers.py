@@ -14,3 +14,11 @@ class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resource
         fields = ('id', 'title', 'url', 'type', 'status', 'topic')
+
+    def validate_topic(self, value):
+        user = self.context['request'].user
+
+        if user != value.owner:
+            raise serializers.ValidationError('Error')
+
+        return value
