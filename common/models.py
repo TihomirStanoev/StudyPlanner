@@ -27,7 +27,7 @@ class SoftDeletionModel(BaseModel):
     def soft_delete(self):
         self.is_deleted = True
         self.deleted_at = timezone.now()
-        self.save()
+        self.save(update_fields=['is_deleted', 'deleted_at', 'updated_at'])
         return 1, {self._meta.label: 1}
 
 
