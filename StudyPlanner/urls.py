@@ -18,10 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 from topics.urls import topics_urlpatterns, resources_urlpatterns
+from tracking.urls import sessions_urlpatterns, goals_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/accounts/', include('accounts.urls')),
     path('api/topics/', include(topics_urlpatterns)),
     path('api/resources/', include(resources_urlpatterns)),
+    path('api/sessions/', include(sessions_urlpatterns)),
+    path('api/goals/', include(goals_urlpatterns)),
 ]
